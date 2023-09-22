@@ -94,6 +94,10 @@ export default {
       type: String,
       default: "none"
     },
+    max: {
+      type: Number,
+      default: 100,
+    },
     className: {
       type: String,
       default: ""
@@ -301,8 +305,8 @@ export default {
 
     function updatePercent() {
       const circumference = 2 * Math.PI * circleRadiusFg();
-      offset.value = circumference - (circumference * props.percent) / 100;
-      const newPercent = Math.round(100 - (100 / circumference) * offset.value);
+      offset.value = circumference - (circumference * props.percent) / props.max;
+      const newPercent = Math.round(props.max - (props.max / circumference) * offset.value);
       animateValue(newPercent);
     }
 
